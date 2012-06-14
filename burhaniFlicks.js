@@ -43,6 +43,7 @@ var g = 0.9;
 
 var pages = {
 	'main' : {
+			id			: 'main',
 			content		: '_img/1.jpg',
 			animation	: { id   : 'Stage-10-20',
 							name : 'EDGE_7314-10-20' },
@@ -60,6 +61,7 @@ var pages = {
 
 		},
 	'one-ten-ten' : {
+			id			: 'one-ten-ten',
 			content		: '#',
 			animation	: { id   : 'Stage-10-20',
 							name : 'EDGE_7314-10-20' },
@@ -78,6 +80,7 @@ var pages = {
 
 		},
 		'one-ten-twenty' : {
+			id			: 'one-ten-twenty',
 			content		: '#',
 			leftNeighbour: 'one-ten-ten',
 			rightNeighbour: 'one-ten-thirty',
@@ -86,6 +89,7 @@ var pages = {
 			hasZoom: function() { if(this.zoom!==undefined) return this.zoom.length ? true : false; else return false; }
 		},
 		'one-ten-thirty' : {
+			id			: 'one-ten-thirty',
 			content		: '#',
 			link		: [ 'one-ten-ten', 'twenty-ten' ],
 			leftNeighbour: 'one-ten-twenty',
@@ -96,6 +100,7 @@ var pages = {
 
 		},
 		'one-ten-forty' : {
+			id			: 'one-ten-forty',
 			content		: '#',
 			link		: [ 'one-ten-ten' ],
 			zoom		: [
@@ -112,6 +117,7 @@ var pages = {
 
 		},
 		'one-ten-fifty' : {
+			id			: 'one-ten-fifty',
 			content		: '#',
 			animation: { id   : 'Stage-10-20',
 							name : 'EDGE_7314-10-20' },
@@ -124,7 +130,6 @@ var pages = {
 
 		}
 	};
-
 //END
 
 var removePages = function(currId){
@@ -151,48 +156,11 @@ var addPages = function(currId){
 		leftNeighbour = pages[currId].leftNeighbour;
 	if(pages[currId].rightNeighbour !== undefined)
 		rightNeighbour = pages[currId].rightNeighbour;
-	var $prevPage = createPage(pages[leftNeighbour]);
-	var $nextPage = createPage(pages[rightNeighbour]);
 	var $this = $('#'+currId);
-	console.log($nextPage);
 	console.log(pages[rightNeighbour]);
 
-	if(!$this.prev('div:[data-role=page]').length)
-	{
-		if($prevPage!==undefined)
-			$this.prepend($prevPage);
-		else
-			console.log('current page is the first page');
-	}
-	if(!$this.next('div:[data-role=page]').length)
-	{
-		console.log('Add page');
-		if($nextPage!==undefined)
-			$this.append($nextPage);
-		else
-			console.log('current page is the last page');
-	}
+	burhaniFlicks.createPages(pages[currId]);
 };
-
-var createPage = function(Data)
-{
-	console.log(ich);
-	if(Data!==undefined)
-	{
-		//var $newPage = ich.getPage(Data);
-		//return $newPage;
-	}
-	else
-		return undefined;
-};
-
-var Page_TEMPLATE = {
-		pId : "sixth",
-		img: "_img/1.jpg",
-		leftNeighbour: "fifth",
-		rightNeighbour: "seventh",
-		zoom:""
-	};
 
 
 var preventDefaultScroll = function(e) {
@@ -204,16 +172,35 @@ var preventDefaultScroll = function(e) {
 	// create listener to prevent scroll function
 document.addEventListener('touchmove', preventDefaultScroll, false);
 
-burhaniFlicks.createPage = function()
+burhaniFlicks.createPages = function(Data)
 {
-	var page;
-	db.get("sixth",function(e){
-		page = e.value;
-	});
-	console.log(page);
-	var $newPage = ich.getPage(page);
-	var $body = $('body');
-	$body.append($newPage);
+	var $prevPage;
+	var $nextPage;
+	var $currentPage = $('.ui-page');
+	var $body = $('.ui-body');
+
+	if(Data.leftNeighbour)
+	{
+		console.log('grabbing left');
+		$prevPage = ich.getPage(pages[Data.leftNeighbour]);
+	}
+	if(Data.rightNeighbour)
+	{
+		console.log('grabbing right');
+		$nextPage = ich.getPage(pages[Data.rightNeighbour]);
+		console.log($nextPage);
+	}
+
+	if($prevPage)
+	{
+		$body.prepend($prevPage);
+	}
+	if($nextPage)
+	{
+		console.log($nextPage);
+		$('body').append($nextPage);
+	}
+
 	var $loader = $('.ui-loader').clone();
 	$('.ui-loader').remove();
 	$body.append($loader);
@@ -222,7 +209,7 @@ burhaniFlicks.createPage = function()
 //Preload images on both sides.
 //TODO: cleanup and make sure images that don't exist are not loaded!.
 $(document).on('pageshow','.ui-page',function(){
-
+	$(this).attr('style','');
 	var $this = $(this);
 	var currId = $this.attr('id');
 
@@ -232,7 +219,6 @@ $(document).on('pageshow','.ui-page',function(){
 	$('body').removeClass('animating');
 
 	//modified jquery library that eliminates flickers. this next line is needed.
-	$(this).attr('style','');
 	//Local variables.
 	var $currentPage = $(this);
 	var $nextPage = $currentPage.next();
@@ -482,7 +468,6 @@ $(document).on('pageshow','.ui-page',function(){
 		'-webkit-transform' : ''
 		});
 		$.mobile.changePage($(this).next(), { transition: style, reverse: false});
-		burhaniFlicks.createPage();
 	}
 	else
 	{
