@@ -11,7 +11,7 @@
 	<script src="js/jquery-1.7.1.min.js"></script>
 	<script src="js/iCanHaz.js"></script>
 	<script src="js/jquery.mobile-1.1.0.js"></script>
-	<script src="../burhaniFlicks.js"></script>
+	<script src="burhaniFlicks.js"></script>
 	
 
 </head>
@@ -23,6 +23,16 @@
 				<div id="{{id}}" class="{{name}}"></div>
 				{{/animation}}
 			{{/isAnimation}}
+
+			{{#isVideo}}
+				{{#video}}
+				<div id="{{id}}" class="{{name}}">
+					<video id="non" width="480" height="320" controls="true" preload="false" poster="{{poster}}">
+						<source src="{{src}}" type='video/mp4'/>
+					</video>
+				</div>
+				{{/video}}
+			{{/isVideo}}
 
 			<img src="{{content}}" alt="" class="main">
 			

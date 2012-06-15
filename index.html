@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>burhaniflicks demo</title>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.css" />
+	<link rel="stylesheet" href="demo.css">	
+	<link href="css/animation.css" rel="stylesheet" type="text/css" media="all"  />
+
+	<script src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/iCanHaz.js"></script>
+	<script src="js/jquery.mobile-1.1.0.js"></script>
+	<script src="burhaniFlicks.js"></script>
+	
+
+</head>
+<script id="getPage" type="text/html">
+	<div data-role="page" id="{{id}}">
+		<div class="content">
+			{{#isAnimation}}
+				{{#animation}}
+				<div id="{{id}}" class="{{name}}"></div>
+				{{/animation}}
+			{{/isAnimation}}
+
+			{{#isVideo}}
+				{{#video}}
+				<div id="{{id}}" class="{{name}}">
+					<video id="non" width="480" height="320" controls="true" preload="false" poster="{{poster}}">
+						<source src="{{src}}" type='video/mp4'/>
+					</video>
+				</div>
+				{{/video}}
+			{{/isVideo}}
+
+			<img src="{{content}}" alt="" class="main">
+			
+			{{#link}}
+			<a href="#{{.}}">X</a>
+			{{/link}}
+		</div>
+		{{#hasZoom}}
+		<div data-role="fakebox" class="fakebox">
+			<ul class="fakebox-inner">
+				{{#zoom}}
+				<li id="{{id}}">
+					<img src="{{source}}" />
+					<a class="zoom"></a>
+				</li>
+				{{/zoom}}
+			</ul>
+		</div>
+		{{/hasZoom}}
+	</div>
+</script>
+
+
+<body>	
+	<div data-role="page" id="main">
+		<div data-role="content">
+			<img src="_img/1.jpg" alt="">
+			<p>Page 1</p>
+		</div>
+	</div>
+</body>
+</html>
