@@ -24,8 +24,9 @@ var pages = {
 			],
 			rightNeighbour: 'one-ten-ten',
 			
-			isAnimation: function() { if(this.animation!==undefined)return true; else return false;},
-			hasZoom: function() { if(this.zoom!==undefined) return this.zoom.length ? true : false; else return false; }
+			isAnimation: function() { if(this.animation)return true; else return false;},
+			isVideo: function() { if(this.video)return true; else return false;},
+			hasZoom: function() { if(this.zoom) return true; else return false; }
 
 		},
 	'one-ten-ten' : {
@@ -47,9 +48,9 @@ var pages = {
 			leftNeighbour: 'main',
 			rightNeighbour: 'one-ten-twenty',
 			
-			isAnimation: function() { if(this.animation!==undefined)return this.animation.length ? true : false; else return false;},
+			isAnimation: function() { if(this.animation)return true; else return false;},
 			isVideo: function() { if(this.video)return true; else return false;},
-			hasZoom: function() { if(this.zoom!==undefined) return this.zoom.length ? true : false; else return false; }
+			hasZoom: function() { if(this.zoom) return true; else return false; }
 
 		},
 		'one-ten-twenty' : {
@@ -58,8 +59,9 @@ var pages = {
 			leftNeighbour: 'one-ten-ten',
 			rightNeighbour: 'one-ten-thirty',
 
-			isAnimation: function() { if(this.animation!==undefined)return this.animation.length ? true : false; else return false;},
-			hasZoom: function() { if(this.zoom!==undefined) return this.zoom.length ? true : false; else return false; }
+			isAnimation: function() { if(this.animation)return true; else return false;},
+			isVideo: function() { if(this.video)return true; else return false;},
+			hasZoom: function() { if(this.zoom) return true; else return false; }
 		},
 		'one-ten-thirty' : {
 			id			: 'one-ten-thirty',
@@ -68,8 +70,9 @@ var pages = {
 			leftNeighbour: 'one-ten-twenty',
 			rightNeighbour: 'one-ten-forty',
 
-			isAnimation: function() { if(this.animation!==undefined)return this.animation.length ? true : false; else return false;},
-			hasZoom: function() { if(this.zoom!==undefined) return this.zoom.length ? true : false; else return false; }
+			isAnimation: function() { if(this.animation)return true; else return false;},
+			isVideo: function() { if(this.video)return true; else return false;},
+			hasZoom: function() { if(this.zoom) return true; else return false; }
 
 		},
 		'one-ten-forty' : {
@@ -85,8 +88,9 @@ var pages = {
 			leftNeighbour: 'one-ten-thirty',
 			rightNeighbour: 'one-ten-fifty',
 
-			isAnimation: function() { if(this.animation!==undefined)return this.animation.length ? true : false; else return false;},
-			hasZoom: function() { if(this.zoom!==undefined) return this.zoom.length ? true : false; else return false; }
+			isAnimation: function() { if(this.animation)return true; else return false;},
+			isVideo: function() { if(this.video)return true; else return false;},
+			hasZoom: function() { if(this.zoom) return true; else return false; }
 
 		},
 		'one-ten-fifty' : {
@@ -98,8 +102,9 @@ var pages = {
 			leftNeighbour: 'one-ten-forty',
 			rightNeighbour: 'end',
 
-			isAnimation: function() { if(this.animation!==undefined)return this.animation.length ? true : false; else return false;},
-			hasZoom: function() { if(this.zoom!==undefined) return this.zoom.length ? true : false; else return false; }
+			isAnimation: function() { if(this.animation)return true; else return false;},
+			isVideo: function() { if(this.video)return true; else return false;},
+			hasZoom: function() { if(this.zoom) return true; else return false; }
 
 		}
 	};
