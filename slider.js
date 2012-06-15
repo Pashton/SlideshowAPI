@@ -1,3 +1,14 @@
+/*
+Dynamic Slider Library.
+Description: Dynamically adds and removes pages to the DOM. Pages are created using a templating system.
+Required Libraries: jQuery, iCanHaz & Moustache
+Concept and Algorithm Design: Hasham Burhani || Engineering and Coding: Andrew Cousineau & Hasham Burhani
+
+Usage: Populate pages with all of your pages and call slider.swipe(pageID) in your swipe functions.
+Don't forget to listen to 'animating' when you call slider. The addition and deletion takes time,
+so while that is happening cancel all swipes.
+*/
+
 var pages = {
 	'main' : {
 			id			: 'main',
@@ -98,6 +109,7 @@ var slider = {};
 //called before a 'jump', swipe should be called after.
 slider.append = function(pageId)
 {
+	$('body').addClass('animating');
 	var pageData = pages[pageId];
 	if(pageData)
 	{
@@ -106,6 +118,7 @@ slider.append = function(pageId)
 	}
 	else
 		console.log('The requested page does not exist.');
+	$('body').removeClass('animating');
 };
 
 //called when a swipe happens, it will update DOM to reflect new pages.
@@ -120,6 +133,7 @@ slider.swipe = function(currId)
 //will remove all pages but currId and it's neighbours.
 slider.removePages = function(currId)
 {
+	$('body').addClass('animating');
 	var $neededPages = $('#'+currId);
 	console.log('removing pages');
 
@@ -145,7 +159,6 @@ slider.addPages = function(currId)
 	var $leftPage;
 	var $rightPage;
 	var $currentPage = $('#'+currId);
-
 	if(pages[currId].leftNeighbour)
 	{
 		leftPageData = pages[leftNeighbour];
@@ -163,8 +176,7 @@ slider.addPages = function(currId)
 		}
 			
 	}
-	
-	
+	$('body').removeClass('animating');
 };
 
 slider.createPage = function(pageData)
