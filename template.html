@@ -12,9 +12,8 @@
 	<script src="js/iCanHaz.js"></script>
 	<script src="js/jquery.mobile-1.1.0.js"></script>
 	<script src="burhaniFlicks.js"></script>
-	
-
 </head>
+
 <script id="getPage" type="text/html">
 	<div data-role="page" id="{{id}}">
 		<div class="content">
@@ -23,7 +22,6 @@
 				<div id="{{id}}" class="{{name}}"></div>
 				{{/animation}}
 			{{/isAnimation}}
-
 			{{#isVideo}}
 				{{#video}}
 				<div id="{{id}}" class="{{name}}">
@@ -35,10 +33,12 @@
 			{{/isVideo}}
 
 			<img src="{{content}}" alt="" class="main">
-			
+			<ul>
 			{{#link}}
-			<a href="#{{.}}">X</a>
+			<li class="{{.}}">
+			</li>
 			{{/link}}
+			</ul>
 		</div>
 		{{#hasZoom}}
 		<div data-role="fakebox" class="fakebox">

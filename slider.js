@@ -111,6 +111,8 @@ slider.append = function(pageId)
 //called when a swipe happens, it will update DOM to reflect new pages.
 slider.swipe = function(currId)
 {
+	console.log('adding pages id: '+currId);
+	console.log(pages[currId]);
 	slider.removePages(currId);
 	slider.addPages(currId);
 };
@@ -119,6 +121,7 @@ slider.swipe = function(currId)
 slider.removePages = function(currId)
 {
 	var $neededPages = $('#'+currId);
+	console.log('removing pages');
 
 	if (pages[currId].leftNeighbour)
 		$neededPages.add('#'+pages[currId].leftNeighbour);
@@ -146,16 +149,19 @@ slider.addPages = function(currId)
 	if(pages[currId].leftNeighbour)
 	{
 		leftPageData = pages[leftNeighbour];
-		$leftPage = createPage(leftPageData);
-		if($('div:[data-role=page]:first') === $currentPage && $leftPage)
+		$leftPage = slider.createPage(leftPageData);
+		if($('div:[data-role=page]:first').attr('id') === $currentPage.attr('id') && $leftPage)
 			$currentPage.before($leftPage);
 	}
 	if(pages[currId].rightNeighbour)
 	{
-		leftPageData = pages[rightNeighbour];
-		$rightPage = createPage(rightPageData);
-		if($('div:[data-role=page]:last') === $currentPage && $rightPage)
-			$currentPage.after($rightPage);
+		rightPageData = pages[rightNeighbour];
+		$rightPage = slider.createPage(rightPageData);
+		if($('div:[data-role=page]:last').attr('id')===$currentPage.attr('id') && $rightPage)
+		{
+			$('#'+currId).after($rightPage);
+		}
+			
 	}
 	
 	
@@ -163,5 +169,10 @@ slider.addPages = function(currId)
 
 slider.createPage = function(pageData)
 {
-	return ich.getPage(pageData);
+	if(pageData)
+	{
+		return ich.getPage(pageData);
+	}
+	else return undefined;
+	
 };
